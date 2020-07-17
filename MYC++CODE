@@ -1,0 +1,503 @@
+// THE AUTHOR OF THIS CODE IS ->  DEWANSH NIGAM.
+// WELCOME TO TIME TRAVEL
+#include<bits/stdc++.h>
+#include <dos.h>
+#include<windows.h> 
+#include <conio.h>
+using namespace std;
+
+
+
+
+
+
+
+// checking leap year
+int leapyr(string d)
+{
+	int d1=(int)d[6]-'0';
+	int d2=(int)d[7]-'0';
+	int d3=(int)d[8]-'0';
+	int d4=(int)d[9]-'0';
+	int yr=(d1*1000)+(d2*100)+(d3*10)+d4;
+	if((yr%4==0)&&(yr%100!=0))
+	return 1;
+	if((yr%4==0)&&(yr%400==0))
+	return 1;
+	return 0;
+}
+
+
+
+
+// checking leap year with int date
+int leapyr2(int yr)
+{
+	if((yr%4==0)&&(yr%100!=0))
+	return 1;
+	if((yr%4==0)&&(yr%400==0))
+	return 1;
+	return 0;
+}
+
+
+
+//checking validity of a date
+int checkValid(string d)
+{
+	if(d.size()!=10)
+	return 0;
+	int sl=0;
+	for(int i=0;i<d.size();i++)
+	{
+		if(d[i]=='/')
+		sl++;
+	}
+	if(sl!=2)
+	return 0;
+	int d1,d2,m1,m2;
+
+	for(int i=0;i<d.size();i++)
+	{
+		if(i!=2&&i!=5)
+		{
+			if(!(d[i]>='0'&&d[i]<='9'))
+			return 0;
+		}
+	}
+
+	d1=(int)d[0]-'0';
+	d2=(int)d[1]-'0';
+	d1=(d1*10)+d2;
+	if(d1>31||d1<=0)
+	return 0;
+	m1=(int)d[3]-'0';
+	m2=(int)d[4]-'0';
+	m1=(m1*10)+m2;
+    if(m1>12||m1<=0)
+    return 0;
+    // check for each month
+    if(m1==4&&d1>=31)
+    {
+    	return 431;
+    }
+        if(m1==6&&d1>=31)
+    {
+    	return 631;
+    }
+        if(m1==9&&d1>=31)
+    {
+    	return 931;
+    }
+        if(m1==11&&d1>=31)
+    {
+    	return 1131;
+    }
+        if(m1==2&&d1==29)
+    {
+    	int leap=leapyr(d);
+    	if(leap==0)
+    	return 229;    	
+    }
+	
+	return 1;
+}
+
+
+
+//the drama
+void drama()
+{
+	cout<<endl<<endl<<endl<<"    ";
+	for(int i=0;i<40;i++)
+{
+	cout<<"-";
+	Sleep(60);
+}
+string in1="   Welcome to Time Travel   ";
+for(int i=0;i<in1.length();i++)
+{
+	Sleep(60);
+	cout<<in1[i];
+}
+	for(int i=0;i<40;i++)
+{
+	cout<<"-";
+	Sleep(60);
+}
+//
+cout<<endl<<endl<<endl;
+string in2="    > Hi,  folks ! Do  you  wish  to  know  what  day  you  were  born  or  on  what  day  India  got  freedom ? ";
+for(int i=0;i<in2.length();i++)
+{
+	Sleep(40);
+	cout<<in2[i];
+}
+cout<<endl<<endl;
+//
+string in3="    > Are  you  intrigued  about  on  what  day  did  Newton  discover  Gravity ? ";
+for(int i=0;i<in3.length();i++)
+{
+	Sleep(40);
+	cout<<in3[i];
+}
+cout<<endl<<endl;
+//
+string in5="    > Do  you  want  to  see  what  day  will  it  be  150  years  from  today  ?   ";
+for(int i=0;i<in5.length();i++)
+{
+	Sleep(40);
+	cout<<in5[i];
+}
+cout<<endl<<endl;
+//
+string in4="    > Did  You  Know  ? - It  was  MONDAY  when  U.S.A.  dropped  Nuclear  Bombs  on  Hiroshima & Nagasaki.  ";
+for(int i=0;i<in4.length();i++)
+{
+	Sleep(40);
+	cout<<in4[i];
+}
+
+cout<<endl<<endl;
+string greg="    > The Calendar we use today internationally is called GREGORIAN CALENDAR , most widely used civil calendar. ";
+string conti="    > Gregorain Calendar was named after Pope Gregory XIII , who introduced it in October 15 , 1582. ";
+for(int i=0;i<greg.length();i++)
+{
+	Sleep(40);
+	cout<<greg[i];
+}
+cout<<endl<<endl;
+for(int i=0;i<conti.length();i++)
+{
+	Sleep(40);
+	cout<<conti[i];
+}
+cout<<endl<<endl;
+cout<<endl<<endl<<"    "<<" Welcome !"<<endl<<endl<<endl<<"    ";
+
+}
+
+
+
+// The actual algorithm
+void seekOutput(int i)
+{
+	string date;
+cout<<endl<<"    Date Entry Number : "<<(i+1)<<"  | Enter Date (DD/MM/YYYY) | - ";
+cin>>date;
+cout<<endl<<endl;
+for(int i=1;i<=10;i--)
+{
+int res=checkValid(date);
+if(res==0)
+{
+cout<<endl<<"    "<<"Invalid Date ! Please Enter A Valid Date - ";
+cin>>date;
+}
+else if(res==431)
+{
+	cout<<endl<<"    "<<"Invalid Date ! April has only 30 day - ";
+	cin>>date;
+}
+else if(res==631)
+{
+	cout<<endl<<"    "<<"Invalid Date ! June has only 30 day - ";
+	cin>>date;
+}
+else if(res==931)
+{
+	cout<<endl<<"    "<<"Invalid Date ! September has only 30 day - ";
+	cin>>date;
+}
+else if(res==1131)
+{
+	cout<<endl<<"    "<<"Invalid Date ! November has only 30 day - ";
+	cin>>date;
+}
+else if(res==229)
+{
+	cout<<endl<<"    "<<"Invalid Date ! February in the Year "<<date.substr(6)<<" only has 28 Days  - ";
+	cin>>date;
+}
+else
+{
+	cout<<endl<<"    "<<" -- Successfully Verified the Date ! --"<<endl<<endl<<endl;	
+break;
+}
+}
+// Here we go !
+
+string day[]={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+int mon[]={31,59,90,120,151,181,212,243,273,304,334,365};
+int monlp[]={31,60,91,121,152,182,213,244,274,305,335,366};
+
+int d1=(int)date[0]-'0';
+int d2=(int)date[1]-'0';
+
+int d=(d1*10)+d2;// day
+
+int m1=(int)date[3]-'0';
+int m2=(int)date[4]-'0';
+
+int m=(m1*10)+m2;// month
+
+int y1=(int)date[6]-'0';
+int y2=(int)date[7]-'0';
+int y3=(int)date[8]-'0';
+int y4=(int)date[9]-'0';
+
+int y=(y1*1000)+(y2*100)+(y3*10)+y4;//year
+ 
+ if((y<=1581)||(y==1582&&m<8))
+ {
+  cout<<"    _____________________________________________"<<endl<<endl;	
+ cout<<"    Sorry ! You Went Past The Gregorian Calendar."<<endl;
+ cout<<"    _____________________________________________"<<endl<<endl<<endl;
+ }
+//cout<<d<<"  "<<m<<"   "<<y;  right
+// is it the current year
+if(y==2018)
+{
+int nthday=0;
+if(m==1)
+nthday=d;
+else
+nthday=(mon[m-2])+d;
+int mod7=(nthday)%7;
+if(mod7==0)
+{
+    cout<<"    ___________________________________________________ "<<endl<<endl;	
+cout<<"    The Day on "<<date<<" - "<<day[6]<<endl;
+    cout<<"    ___________________________________________________ "<<endl<<endl<<endl;
+}
+else
+{
+    cout<<"    ___________________________________________________ "<<endl<<endl;	
+cout<<"    The Day on "<<date<<" - "<<day[--mod7]<<endl;	
+    cout<<"    ___________________________________________________ "<<endl<<endl<<endl;	
+}
+}
+
+
+
+// is it a leap year?
+
+int leap=leapyr2(y);
+if(leap==1&&y!=2018&&y>1582)
+{
+	// Yes it's a leap year
+int nthday=0;
+if(m==1)
+nthday=d;
+else
+nthday=monlp[m-2]+d;
+int mod7=nthday%7;	
+
+//cout<<"nth day for "<<date<<"   = "<<nthday<<endl;
+//cout<<" Mod 7 for same"<<mod7<<endl;
+
+// making it validate for monday as a beginning
+
+if(mod7==0)
+mod7=6;
+else
+--mod7;
+
+// calc time lag
+int timelag=0;
+int lpy=0;int ty=0;
+
+ty=abs(2018-y);
+//  past
+if(y<2018)
+{
+	for(int i=y;i<2018;i++)
+	{
+		if(leapyr2(i)==1)
+		lpy++;
+	}
+    cout<<"    _____________________________________________________________ "<<endl<<endl;	
+	cout<<"    Number of Total Years From Current Year 2018 to "<<y<<"  - "<<ty<<endl;
+	cout<<"    Number of Leap Years From Current Year 2018 to "<<y<<"  - "<<lpy<<endl;
+	cout<<"    Number of Non-Leap Years From Current Year 2018 to "<<y<<"  - "<<(ty-lpy)<<endl;
+    cout<<"    _____________________________________________________________ "<<endl<<endl<<endl;		
+	timelag=(2*lpy)+(ty-lpy);// as it is
+	timelag=(timelag%7);
+	// get the day
+	int startday=0;
+	for(int i=0;i<timelag;i++)
+	{
+		startday--;
+		if(startday<0)
+		startday=6;
+	}
+    cout<<"    ___________________________________________________ "<<endl<<endl;	
+	cout<<"    The Year " <<y<<" Begins With The day - "<<day[startday]<<endl;
+    cout<<"    ___________________________________________________ "<<endl<<endl<<endl;	
+	int thatday=0;
+	thatday=startday+mod7;
+//			cout<<" that day for same"<<thatday<<endl;
+	thatday%=7;
+//			cout<<" that day for same after mod"<<thatday<<endl;
+    cout<<"    ___________________________________________________ "<<endl<<endl;	
+	cout<<"    The Day on "<<date<<" - "<<day[thatday]<<endl;
+    cout<<"    ___________________________________________________ "<<endl<<endl<<endl;	
+}
+// future
+else
+{
+	for(int i=2018;i<=y;i++)
+	{
+		if(leapyr2(i)==1)
+		lpy++;
+	}
+	    cout<<"    _____________________________________________________________ "<<endl<<endl;	
+	cout<<"    Number of Total Years From Current Year 2018 to "<<y<<"  - "<<ty<<endl;
+	cout<<"    Number of Leap Years From Current Year 2018 to "<<y<<"  - "<<lpy<<endl;
+	cout<<"    Number of Non-Leap Years From Current Year 2018 to "<<y<<"  - "<<(ty-lpy)<<endl;
+    cout<<"    _____________________________________________________________ "<<endl<<endl<<endl;	
+	timelag=(2*lpy)+(ty-lpy);// as it is
+	timelag--;
+	timelag=(timelag%7);
+	// get the day
+	int startday=0;
+	for(int i=0;i<timelag;i++)
+	{
+		startday++;
+		if(startday>6)
+		startday=0;
+	}
+    cout<<"    ___________________________________________________ "<<endl<<endl;	
+	cout<<"    The Year "<<y<<" Begins With The Day - "<<day[startday]<<endl;
+    cout<<"    ___________________________________________________ "<<endl<<endl<<endl;	
+	int thatday=0;
+	thatday=startday+mod7;
+//			cout<<" that day for same"<<thatday<<endl;
+	thatday=thatday%7;
+//			cout<<" that day for same after mod"<<thatday<<endl;
+    cout<<"    ___________________________________________________ "<<endl<<endl;	
+	cout<<"    The Day on "<<date<<" - "<<day[thatday]<<endl;
+    cout<<"    ___________________________________________________ "<<endl<<endl<<endl;	
+}
+// done for leap year;
+}
+
+// Nah! Not A leap Year
+if(leapyr2(y)!=1&&y!=2018&&y>1582)
+{
+int nthday=0;
+if(m==1)
+nthday=d;
+else
+nthday=mon[m-2]+d;
+int mod7=nthday%7;	
+
+//cout<<"nth day for "<<date<<"   = "<<nthday<<endl;
+//cout<<" Mod 7 for same"<<mod7<<endl;
+// validating monday as a beginning
+if(mod7==0)
+mod7=6;
+else
+--mod7;
+
+
+//cout<<" Mod 7 for same"<<mod7<<endl;
+
+
+// calc time lag
+int timelag=0;
+int lpy=0;int ty=0;
+
+ty=abs(2018-y);
+//  past
+if(y<2018)
+{
+	for(int i=y;i<2018;i++)
+	{
+		if(leapyr2(i)==1)
+		lpy++;
+	}
+	    cout<<"    _____________________________________________________________ "<<endl<<endl;	
+	cout<<"    Number of Total Years From Current Year 2018 to "<<y<<"  - "<<ty<<endl;
+	cout<<"    Number of Leap Years From Current Year 2018 to "<<y<<"  - "<<lpy<<endl;
+	cout<<"    Number of Non-Leap Years From Current Year 2018 to "<<y<<"  - "<<(ty-lpy)<<endl;
+    cout<<"    _____________________________________________________________ "<<endl<<endl<<endl;	
+	timelag=(2*lpy)+(ty-lpy);// as it is
+	timelag=(timelag%7);
+	// get the day
+	int startday=0;
+	for(int i=0;i<timelag;i++)
+	{
+		startday--;
+		if(startday<0)
+		startday=6;
+	}
+    cout<<"    ___________________________________________________ "<<endl<<endl;	
+	cout<<"    The Year "<<y<<" Begins With The Day - "<<day[startday]<<endl;
+    cout<<"    ___________________________________________________ "<<endl<<endl<<endl;	
+    int thatday=0;
+    
+	thatday=startday+mod7;
+//			cout<<" that day for same"<<thatday<<endl;
+	thatday=thatday%7;
+//			cout<<" that day for same after mod"<<thatday<<endl;
+    cout<<"    ___________________________________________________ "<<endl<<endl;	
+	cout<<"    The Day on "<<date<<" - "<<day[thatday]<<endl;
+    cout<<"    ___________________________________________________ "<<endl<<endl<<endl;	
+}
+// future
+else
+{
+	for(int i=2018;i<=y;i++)
+	{
+		if(leapyr2(i)==1)
+		lpy++;
+	}
+	    cout<<"    _____________________________________________________________ "<<endl<<endl;	
+	cout<<"    Number of Total Years From Current Year 2018 to "<<y<<"  - "<<ty<<endl;
+	cout<<"    Number of Leap Years From Current Year 2018 to "<<y<<"  - "<<lpy<<endl;
+	cout<<"    Number of Non-Leap Years From Current Year 2018 to "<<y<<"  - "<<(ty-lpy)<<endl;
+    cout<<"    _____________________________________________________________ "<<endl<<endl<<endl;	
+	timelag=(2*lpy)+(ty-lpy);// as it is
+	timelag=(timelag%7);
+	// get the day
+	int startday=0;
+	for(int i=0;i<timelag;i++)
+	{
+		startday++;
+		if(startday>6)
+		startday=0;
+	}
+    cout<<"    ___________________________________________________ "<<endl<<endl;	
+	cout<<"    The Year "<<y<<" Begins With The Day - "<<day[startday]<<endl;
+    cout<<"    ___________________________________________________ "<<endl<<endl<<endl;	
+	int thatday=0;
+	thatday=mod7+startday;
+//			cout<<" that day for same"<<thatday<<endl;
+	thatday%=7;
+//			cout<<" that day for same after mod"<<thatday<<endl;
+     cout<<"    ___________________________________________________ "<<endl<<endl;	
+    	cout<<"    The Day on "<<date<<" - "<<day[thatday]<<endl;
+    cout<<"    ___________________________________________________ "<<endl<<endl<<endl;	
+}
+// done for non-leap year.	
+}
+
+// End
+}
+
+
+// The main function
+int main()
+{
+//drama();
+//multiple entries
+int x;
+cout<<endl<<endl<<"    | Enter The Number Of Date Entries | - ";
+cin>>x;
+cout<<endl<<endl;
+for(int i=0;i<x;i++)
+	seekOutput(i);
+
+getch();
+}
